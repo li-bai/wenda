@@ -1,0 +1,29 @@
+<extend name="Public:admin" />
+<block name="body">
+	<form action="" method="post">
+		<table class="table">
+			<tr >
+				<td class="th" colspan="2">修改密码</td>
+			</tr>
+			<tr>
+				<td>用户名</td>
+				<td><input type="text" name='username' value="{$Think.get.user}"></td>
+			</tr>
+			<tr>
+				<td>新密码：</td>
+				<td><input type="password" name="passwd"/></td>
+			</tr>
+			<tr>
+				<td>确认密码：</td>
+				<td><input type="password" name="passwdc"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="hidden" name="uid" value="{$Think.get.uid}">
+					<input type="submit" value="修改" class="input_button"/>
+					<input type="reset" class="input_button"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</block>

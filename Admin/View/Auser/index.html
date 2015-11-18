@@ -1,0 +1,43 @@
+<extend name="Public:admin" />
+<block name="css"> 
+<js href="__PUBLIC__/jquery-1.7.2.min.js" />
+</block>
+<block name="body">
+	<table class="table">
+		<tr>
+			<td class="th" colspan="20">后台用户列表</td>
+		</tr>
+		<tr class="tableTop">
+			<td class="tdLittle1">ID</td>
+			<td>用户名</td>
+			<td>最后登录时间</td>
+			<td>最后登录IP</td>
+			<td>用户角色</td>
+			<td>帐号状态</td>
+			<td>操作</td>
+		</tr>
+		<foreach name="data" item="v">
+		<tr>
+			<td width="10%">{$v.uid}</td>
+			<td width="10%">{$v.username}</td>
+			<td width="20%">{$v.logintime|date='Y-m-d H:i:s',###}</td>
+			<td width="15%">{$v.loginip}</td>
+			<td>{$v.title}</td>
+			<td width="10%"> 
+			<if condition="$v['lock'] eq 1">
+					锁定<else />正常
+			</if>
+			</td>
+			<td> 
+				<if condition="$v['lock'] eq 1">
+					<a href="{:U('Auser/unlock',array('uid'=>$v['uid']))}">解锁</a> <else /><a href="{:U('Auser/lock',array('uid'=>$v['uid']))}">锁定</a>
+					<a href="{:U('Auser/edit',array('user'=>$v['username'],'uid'=>$v['uid']))}">修改</a>
+				<if condition="!in_array($v['uid'],C('ADMIN_ID'))">
+					<a href="{:U('setrule',array('uid'=>$v['uid']))}">配置权限</a> <a href="{:U('Auser/del',array('uid'=>$v['uid']))}">删除</a>	
+				</if>
+				</if>
+			</td>
+		</tr>
+		</foreach>
+	</table>
+</block>

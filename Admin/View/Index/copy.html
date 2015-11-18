@@ -1,0 +1,40 @@
+<extend name="Public:admin" />
+<block name="body">
+<table class="table">
+		<tr>
+			<td colspan='2' class="th"><span class="span_server" style="float:left">&nbsp</span>服务器信息</td>
+		</tr>
+		<tr>
+			<td>服务器环境</td>
+			<td>{$_SERVER.SERVER_SOFTWARE}</td>
+		</tr>
+		<tr>
+			<td>PHP版本</td>
+			<td>{:PHP_VERSION} </td>
+		</tr>
+		<tr>
+			<td>服务器IP</td>
+			<td>{:gethostbyname($_SERVER['SERVER_NAME'])}</td>
+		</tr>
+		<tr>
+			<td>数据库信息</td>
+			<td>{$mysql}</td>
+		</tr>
+		<tr>
+			<td colspan='2' class="th"><span class="span_people">&nbsp</span>管理员信息</td>
+		</tr>
+		<tr>
+			<td>用户名</td>
+			<td>{$Think.session.username}</td>
+		</tr>
+		<tr>
+			<td>登录时间</td>
+			<td>{$data.logintime|date='Y-m-d',###}</td>
+		</tr>
+		<tr>
+			<td>登陆IP</td>
+			<td>{$data.loginip}</td>
+		</tr>
+		
+</table>
+</block>

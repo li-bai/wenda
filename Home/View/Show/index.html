@@ -1,0 +1,130 @@
+<extend name="Public:common" />
+<block name="css">
+<css href="__CSS__/question.css" />
+<css href="__STATIC__/hdvalidate/css/hdvalidate.css" />
+<js href="__STATIC__/hdvalidate/js/hdvalidate.js" />
+<script type="text/javascript"> 
+APP = '__APP__';
+</script>
+<js href="__JS__/index.js" />
+</block>
+<block name="body">
+<include file="Public:top" />
+	<div id='location'>
+		<a href="">全部分类</a>
+		<volist name="list" id="v">
+			<if condition="$i neq count($list)">&gt;&nbsp;&nbsp;<a href="{:U('List/index',array('cid'=>$v['cid']))}">{$v.title}</a>&nbsp;&nbsp;<else />&gt;&nbsp;{$v.title}&nbsp;</if>
+		</volist>
+	</div>
+	<!--------------------中部-------------------->
+	<div id='center-wrap'>
+		<div id='center'>
+			<div id='left'>
+				<div id='answer-info'>
+					<!-- 如果没有解决用wait -->
+					<div class='ans-state <if condition="$ask['solve'] eq 0">wait</if>'></div>
+					<div class='answer'>
+						<p class='ans-title'>{$ask.content}
+							<if condition="$ask['reward']">
+								<b class='point'>{$ask.reward}</b>	
+							</if>
+						</p>
+					</div>
+					<ul>
+						<li><a href="">{$ask.username}</a></li>
+						<li><i class='level lv{$ask.lv}' title='Level {$ask.lv}'></i></li>
+						<li>{$ask.time|date='Y-m-d',###}</li>
+					</ul>
+					<if condition="$ask['solve'] eq 0 and isset($_SESSION['user']) and isset($_SESSION['uid']) and $ask['uid']!=$_SESSION['uid']">
+					<div class='ianswer'>
+						<form action="{:U('Home/Show/answer')}" method='POST'>
+							<p>我来回答</p>
+							<textarea name="content"></textarea>
+							<input type="hidden" name='asid' value='{$Think.get.asid}'>
+							<input type="submit" value='提交回答' id='anw-sub'/>
+						</form>
+					</div>
+					</if>
+					<!-- 满意回答 -->
+					<if condition="$ask['solve'] eq 1">
+						<div class='ans-right'>
+						<p class='title'><i></i>满意回答<span></span></p>
+						<p class='ans-cons'>{$satisfy.content}</p>
+						<dl>
+							<dt>
+								<a href="{:U('Member/index',array('uid'=>$satisfy['uid']))}">
+									<if condition="$satisfy['face']">
+									<img src="__ROOT__/{$satisfy.face}" width='48' height='48'/><else />
+									<img src="__IMG__/001.png" width='48' height='48'/>
+									</if>
+							</a>
+							</dt>
+							<dd>
+								<a href="{:U('Member/index',array('uid'=>$satisfy['uid']))}">{$satisfy.username}</a>
+							</dd>
+							<dd><i class='level lv{$satisfy.lv}'></i></dd>
+							<dd>{$satisfy['accnum']}%</dd>
+						</dl>
+						</div>	
+					</if>
+					
+					<!-- 满意回答 -->
+				</div>
+				<!-- 所有回答 -->
+				<if condition="count($answer) neq 0 ">
+				<div id='all-answer'>
+
+				
+					<div class='ans-icon <if condition="$ask['solve'] eq 1">other</if>'></div>
+					<p class='title'>共 <strong>{$num}</strong> 条回答</p>
+					<ul>
+						<foreach name="answer" item="v">
+							<li>
+								<div class='face'>
+									<a href="{:U('Member/index',array('uid'=>$v['uid']))}">
+										<if condition="$v['face']">
+											<img src="__ROOT__/{$v.face}" width='48' height='48'/>
+										<else />
+											<img src="__IMG__/001.png" width='48' height='48'/>
+										{$v.username}</if>
+									</a>
+								</div>
+								<div class='cons blue'>
+									<p>{$v.content}<span style='color:#888;font-size:12px'>&nbsp;&nbsp;({$v.time|date='Y-m-d',###})</span></p>
+								</div>
+								<if condition="$ask['uid']==session('uid') and $ask['solve'] eq 0">
+									<a href="{:U('Home/Show/accept',array('asid'=>I('get.asid'),'anid'=>$v['anid']))}" class='adopt-btn'>采纳</a>	
+								</if>
+							</li>
+							</foreach>
+					</ul>
+					<div class='page'>
+						{$page}
+					</div>
+				</div>
+				</if>
+				<!-- <所有回答 -->
+
+				<!-- 待解决 -->
+				<if condition="$rand">
+				
+					<div id='other-ask'>
+						<p class='title'>待解决的相关问题</p>
+						<table>
+							<tr>
+								<td class='t1'><a href="{:U('Show/index',array('asid'=>$rand['asid'],'cid'=>$rand['cid']))}">{$rand.content}</a></td>
+								<td>{$rand.answer}&nbsp;回答</td>
+								<td>{$rand.time|date='Y-m-d',###}</td>
+							</tr>
+						</table>
+					</div>
+				</if>
+			</div>
+		<include file="Public:userright" />
+		</div>
+	</div>
+</block>
+	
+
+
+	

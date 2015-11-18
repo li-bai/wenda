@@ -1,0 +1,56 @@
+<extend name="Public:common" />
+<block name="css">
+<css href="__CSS__/member.css" />
+<css href="__STATIC__/hdvalidate/css/hdvalidate.css" />
+<js href="__STATIC__/hdvalidate/js/hdvalidate.js" />
+<js href="__JS__/member.js" />
+<script type="text/javascript"> 
+APP = '__APP__';
+</script>
+<js href="__JS__/index.js" />
+</block>
+<block name="body">
+<include file="Public:top" />
+	<div id='center'>
+<include file="Public:left" />
+		<div id='right'>
+			<p class='title'>我的金币</p>
+			<p class='lv-info'>
+				<if condition="$left['point']">
+					{$left.sex}现有金币<span>{$left.point}</span>
+				<else />
+					{$left.sex}还没有金币，赶紧向着高富帅去奋斗吧！
+				</if>
+			</p>
+			<div class='lv-rule'>
+				<p><span>金币获取</span></p>
+				<table class='lv-exp'>
+					<tr>
+						<th>操作</th>
+						<th>获得金币</th>
+					</tr>
+					<tr>
+						<td>回答</td>
+						<td>+{:C('ANSEER_POINT')}金币</td>
+					</tr>
+					<tr>
+						<td>回答被采纳</td>
+						<td>+{:C('ANSWER_ACCEPT_POINT')}金币</td>
+					</tr>
+					<tr>
+						<td>回答被删除：</td>
+						<td>-{:C('ANSWER_DEL_POINT')}金币</td>
+					</tr>
+					<tr>
+						<td>提问被删除：</td>
+						<td>-{:C('ASK_DEL_POINT')}金币</td>
+					</tr>
+					<tr>
+						<td>采纳回答被删除</td>
+						<td>提问者：-{:C('ACCEPT_DEL_ASK')}金币&nbsp;&nbsp;回答者：-{:C('ACCEPT_DEL_ANSWER')}金币</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</block>

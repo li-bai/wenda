@@ -1,0 +1,24 @@
+<extend name="Public:admin" />
+<block name="body">
+<form action="" method="post">
+		<table class="table">
+			<tr >
+				<td class="th" colspan="2">修改角色组</td>
+			</tr>
+			<tr>
+				<td>角色组名</td>
+				<td><input value="{$info.title}" type="text" name="title"/></td>
+			</tr>
+			<tr>
+				<td>描述</td>
+				<td><input type="text" value="{$info.description}" name="description"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="修改" class="input_button"/>
+					<input type="reset" class="input_button"/>
+				</td>
+			</tr>
+		</table>
+</form>
+</block>

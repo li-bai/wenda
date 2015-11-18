@@ -1,0 +1,46 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<title><?php echo isset($message)?"操作成功":"操作失败"; ?></title>
+        <js href="__PUBLIC__/jquery-1.7.2.min.js" />
+        <link rel="stylesheet" href="__PUBLIC__/err/err.css">
+	</head>
+	<body>
+    <div class="wrap">
+      <div class="title">
+        <?php echo isset($message)?"操作成功":"操作失败"; ?>
+      </div>
+      <div class="content">
+        <div class="icon"></div>
+        <div class="message">
+          <?php if(isset($message)){ ?>
+            <div style="margin-top:10px;margin-bottom:15px;">
+              <?php echo($message); ?>
+            </div>
+          <?php }else{ ?>
+            <div style="margin-top:10px;margin-bottom:15px;">
+              <?php echo($error); ?>
+            </div>
+          <?php } ?>
+          <a href="<?php echo($jumpUrl); ?>" class="hd-cancel" id='href'>
+            返回
+          </a>
+        </div>
+      </div>
+    </div>
+<script type="text/javascript">
+(function(){
+var href = document.getElementById('href').href;
+setTimeout(function(){
+		location.href = href;
+}, 1000);
+})();
+</script>
+	</body>
+</html>

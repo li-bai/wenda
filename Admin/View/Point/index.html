@@ -1,0 +1,47 @@
+<extend name="Public:admin" />
+<block name="body">
+<form action="{:U('editConfig')}" method='POST'>
+	<table class="table">
+		<tr>
+			<td colspan='2' class="th">金币奖励规则设置</td>
+		</tr>
+			<tr>
+				<td align='right' width='45%'>回答：</td>
+				<td>
+					+ <input type="text" name='ANSEER_POINT' value="{:C('ANSEER_POINT')}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>回答被采纳：</td>
+				<td>
+					+ <input type="text" name='ANSWER_ACCEPT_POINT' value="{:C('ANSWER_ACCEPT_POINT')}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>回答被删除：</td>
+				<td>
+					- <input type="text" name='ANSWER_DEL_POINT' value="{:C('ANSWER_DEL_POINT')}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>提问被删除：</td>
+				<td>
+					- <input type="text" name='ASK_DEL_POINT' value="{:C('ASK_DEL_POINT')}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>采纳回答被删除：</td>
+				<td>
+					提问者：&nbsp;- <input type="text" name='ACCEPT_DEL_ASK' value="{:C('ACCEPT_DEL_ASK')}"/>&nbsp;&nbsp;
+					回答者：&nbsp;- <input type="text" name='ACCEPT_DEL_ANSWER' value="{:C('ACCEPT_DEL_ANSWER')}"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2' height='60' align='center'>
+					<input type="submit" value='保存修改' class='input_button'/>
+				</td>
+			</tr>
+
+	</table>
+</form>
+</block>

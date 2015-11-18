@@ -1,0 +1,68 @@
+<extend name="Public:common" />
+<block name="css">
+<css href="__CSS__/member.css" />
+<css href="__STATIC__/hdvalidate/css/hdvalidate.css" />
+<js href="__STATIC__/hdvalidate/js/hdvalidate.js" />
+<js href="__JS__/member.js" />
+<script type="text/javascript">
+APP = '__APP__';
+</script>
+<js href="__JS__/index.js" />
+</block>
+<block name="body">
+<include file="Public:top" />
+	<div id='center'>
+<include file="Public:left" />
+		<div id='right'>
+			<p class='title'>{$left.sex}的的等级</p>
+			<p class='lv-info'>恭喜您，已经升到 <span>Lv{$left.lv}</span> 级啦，距下一级还需 <span>{$left.next}</span> 经验值!</p>
+			<div class='lv-rule'>
+				<p><span>等级规则</span></p>
+				<table class='lv-exp'>
+					<tr>
+						<th>等级</th>
+						<th>经验值</th>
+					</tr>
+				<foreach name="lv" item="v" key="k">
+					<if condition="'LV'.$left['lv'] eq $k">
+						<tr class="cur">
+							<td >{$left.sex}的现在<span>{$k}</span>级</td>
+							<td><span>{$left.exp}</span></td>
+						</tr>
+					<else />
+						<tr>
+							<td>{$k}</td>
+							<td>{$v}</td>
+						</tr>
+					</if>
+				</foreach>
+				</table>
+			</div>
+			<div class='lv-rule'>
+				<p><span>经验获取规则</span></p>
+				<table class='lv-exp'>
+					<tr>
+						<th>操作</th>
+						<th>获得经验值</th>
+					</tr>
+					<tr>
+						<td>每天登录</td>
+						<td>{:C('LOGIN_EXP')}</td>
+					</tr>
+					<tr>
+						<td>提问</td>
+						<td>{:C('ASK_EXP')}</td>
+					</tr>
+					<tr>
+						<td>回答</td>
+						<td>{:C('ANSWER_EXP')}</td>
+					</tr>
+					<tr>
+						<td>采纳与被采纳</td>
+						<td>{:C('SOLVE_EXP')}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</block>

@@ -1,0 +1,33 @@
+<extend name="Public:admin" />
+<block name="body">
+	<table class="table">
+		<tr>
+			<td class="th" colspan="20">答案列表</td>
+		</tr>
+		<if condition="$data">
+		<tr class="tableTop">
+			<td class="tdLittle1">ID</td>
+			<td>答案内容</td>
+			<td>回答时间</td>
+			<td>操作</td>
+		</tr>
+		<foreach name="data" item="v">
+		<tr>
+			<td>{$v.anid}</td>
+			<td>{$v.content}</td>
+			<td>{$v.time|date='Y-m-d',###}</td>
+			<td>
+				<a href="{:U('Answer/del',array('anid'=>$v['anid']))}" class="del">删除</a>
+			</td>
+		</tr>
+		</foreach>
+		<else />
+		<tr> 
+			<td colspan='4'>没查找到数据</td>
+		</tr>
+		</if>
+	</table>
+	<div class="page">
+		{$page}
+	</div>
+</block>

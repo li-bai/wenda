@@ -1,0 +1,54 @@
+<div id='left'>
+		<div class='userinfo'>
+			<dl>
+				<dt>
+					<a href="{:U('Member/index',array('uid'=>$left['uid']))}"><if condition="$left['face']"><img src="__ROOT__/{$left['face']}" width='60' height='60' alt="占位符"/><else /><img src="__IMG__/001.png" width='60' height='60' alt="占位符"/></if></a>
+				</dt>
+				<dd class='username'>
+					<a href="{:U('Member/index',array('uid'=>$left['uid']))}"><b>{$left.username}</b>
+					</a>
+					<a href="{:U('Member/mylevel',array('uid'=>$left['uid']))}">
+						<i class='level lv{$left.lv}' title='Level {$left.lv}'></i>
+					</a>
+				</dd>
+				<dd>金币：<a href="{:U('Member/mygold',array('uid'=>$left['uid']))}" style="color: #888888;"><b class='point'>{$left.point}</b></a></dd>
+				<dd>经验值：{$left.exp}</dd>
+			</dl>
+			<table>
+				<tr>
+					<td>回答数</td>
+					<td>采纳率</td>
+					<td class='last'>提问数</td>
+				</tr>
+				<tr>
+					<td><a href="{:U('Member/myanswer',array('uid'=>$left['uid']))}">{$left.answer}</a></td>
+					<td><a href="{:U('Member/index',array('uid'=>$left['uid']))}">{$left.accnum}%</a></td>
+					<td class='last'><a href="{:U('Member/myask',array('uid'=>$left['uid']))}">{$left.ask}</a></td>
+				</tr>
+			</table>
+		</div>
+
+		<ul>
+			<li class='myhome <if condition="ACTION_NAME eq 'index'">cur</if>'>
+				<a href="{:U('index',array('uid'=>I('get.uid')))}">{$left.sex}的首页</a>
+			</li>
+			<li class='myask <if condition="ACTION_NAME eq 'myask'">cur</if>'>
+				<a href="{:U('myask',array('uid'=>I('get.uid')))}">{$left.sex}的提问</a>
+			</li>
+			<li class='myanswer <if condition="ACTION_NAME eq 'myanswer'">cur</if>'>
+				<a href="{:U('myanswer',array('uid'=>I('get.uid')))}">{$left.sex}的回答</a>
+			</li>
+			<li class='mylevel <if condition="ACTION_NAME eq 'mylevel'">cur</if>'>
+				<a href="{:U('mylevel',array('uid'=>I('get.uid')))}">{$left.sex}的等级</a>
+			</li>
+			<li class='mygold <if condition="ACTION_NAME eq 'mygold'">cur</if>'>
+				<a href="{:U('mygold',array('uid'=>I('get.uid')))}">{$left.sex}的金币</a>
+			</li>
+			<if condition="session('user') && session('uid') && session('uid')==I('get.uid')">
+				<li class='myface <if condition="ACTION_NAME eq 'myface'">cur</if>'>
+				<a href="{:U('myface',array('uid'=>I('get.uid')))}">上传头像</a>
+				</li>	
+			</if>
+			<li style="background:none"></li>
+		</ul>
+	</div>

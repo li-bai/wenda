@@ -1,0 +1,24 @@
+<extend name="Public:admin" />
+<block name="body">
+<form action="" method="post">
+		<table class="table">
+			<tr >
+				<td class="th" colspan="2">修改权限</td>
+			</tr>
+			<tr>
+				<td>权限名</td>
+				<td><input type="text" name="title" value="{$rule.title}" /></td>
+			</tr>
+			<tr>
+				<td width="20%">权限URL(例:'Admin/Index/index')</td>
+				<td><input type="text" name="name" value="{$rule.name}" /></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="修改" class="input_button"/>
+					<input type="reset" class="input_button"/>
+				</td>
+			</tr>
+		</table>
+</form>
+</block>

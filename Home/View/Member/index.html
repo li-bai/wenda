@@ -1,0 +1,73 @@
+<extend name="Public:common" />
+<block name="css">
+<css href="__CSS__/member.css" />
+<css href="__STATIC__/hdvalidate/css/hdvalidate.css" />
+<js href="__STATIC__/hdvalidate/js/hdvalidate.js" />
+<script type="text/javascript"> 
+APP = '__APP__';
+</script>
+<js href="__JS__/index.js" />
+</block>
+<block name="body">
+<include file="Public:top" />
+	<div id='center'>
+	<include file="Public:left" />
+<!-- 左侧结束 -->
+	<div id='right'>
+		<p class='title'>{$left.sex}的首页</p>
+		<ul class='property'>
+			<li>金币：<span>{$left.point}</span></li>
+			<li>经验值：<span>{$left.exp}</span></li>
+			<li>采纳率：<span>{$left.accnum}%</span></li>
+		</ul>
+		<div class='list'>
+			<p><span>{$left.sex}的提问 <b>(共{$left.ask}条)</b></span><a href="{:U('myask',array('uid'=>$_GET['uid']))}">更多>></a></p>
+			<table>
+				<tr>
+					<th class='t1'>标题</th>
+					<th>回答数</th>
+					<th class='t3'>更新时间</th>
+				</tr>	
+				<if condition="$askdata">
+					<foreach name="askdata" item="v">
+						<tr>
+							<td class='t1'><a href="{:U('Show/index',array('asid'=>$v['asid'],'cid'=>$v['cid']))}">{$v.content}</a><span> [ <a class='list' href="{:U('List/index',array('cid'=>$v['cid']))}">{$v.title}</a> ] </span></td>
+							<td>{$v.answer}</td>
+							<td class='t3'>{$v.time|date='Y-m-d',###}</td>
+						</tr>
+					</foreach>
+				<else />
+					<tr height='140'>
+						<td>{$left.sex}还没有进行过提问</td>
+					</tr>
+				</if>
+			</table>
+		</div>
+		<div class='list'>
+			<p><span>{$left.sex}的回答 <b>(共{$left.answer}条)</b></span><a href="{:U('myanswer',array('uid'=>$_GET['uid']))}">更多>></a></p>
+			<table>
+
+			<if condition="$answerdata">
+				<tr>
+					<th class='t1'>标题</th>
+					<th>回答</th>
+					<th class='t3'>更新时间</th>
+				</tr>
+				<foreach name="answerdata" item="v">
+					<tr>
+						<td class='t1'>
+							<a href="{:U('Show/index',array('asid'=>$v['asid'],'cid'=>$v['cid']))}">{$v.content}</a><span> [ <a class='list' href="{:U('List/index',array('cid'=>$v['cid']))}">{$v.title}</a> ] </span>
+						</td>
+						<td>{$v.answer}</td>
+						<td class='t3'>{$v.time|date='Y-m-d',###}</td>
+					</tr>
+				</foreach>
+			<else />
+				<tr height='140'>
+					<td>你还没有进行过回答</td>
+				</tr>
+			</if>
+			</table>
+		</div>
+	</div>
+</block>

@@ -1,0 +1,55 @@
+<extend name="Public:common" />
+<block name="css">
+<css href="__CSS__/member.css" />
+<css href="__STATIC__/hdvalidate/css/hdvalidate.css" />
+<js href="__STATIC__/hdvalidate/js/hdvalidate.js" />
+<js href="__JS__/member.js" />
+<script type="text/javascript"> 
+APP = '__APP__';
+</script>
+<js href="__JS__/index.js" />
+</block>
+<block name="body">
+<include file="Public:top" />
+	<div id='center'>
+<include file="Public:left" />
+		<div id='right'>
+			<p class='title'>{$left.sex}的回答</p>
+			<ul class='ask-filter'>
+				<li <if condition="I('get.uid') neq 1">class='cur'</if>><a href="{:U('myanswer',array('uid'=>I('get.uid')))}">全部回答</a></li>
+				<li <if condition="I('get.uid') eq 1">class='cur'</if>><a href="{:U('myanswer',array('uid'=>I('get.uid'),'s'=>1))}">被采纳的回答</a></li>
+			</ul>
+			<div class='list list-filter'>
+				<table>
+				<if condition="$data">
+						<tr>
+							<th class='t1'>标题</th>
+							<th>回答</th>
+							<th class='t3'>更新时间</th>
+						</tr>
+					<foreach name="data" item="v">
+						<tr>
+							<td class='t1'>
+								<a href="{:U('Show/index',array('asid'=>$v['asid'],'cid'=>$v['cid']))}">{$v.content}</a><span> [ <a href="{:U('List/index',array('cid'=>$v['cid']))}" class="list">{$v.title}</a> ] </span>
+							</td>
+							<td>{$v.answer}</td>
+							<td class='t3'>{$v.time|date='Y-m-d',###}</td>
+						</tr>
+					</foreach>
+					<tr>
+						<td><div class="page">{$page}</div></td>
+					</tr>
+					<else />
+						<tr height='140'>
+							<if condition="I('get.s') neq 1">
+								<td>{$left.sex}还没有回答</td>
+							<else />
+								<td>{$left.sex}还没有被采纳的回答</td>
+							</if>
+						</tr>
+					</if>
+				</table>
+			</div>
+		</div>
+	</div>
+</block>

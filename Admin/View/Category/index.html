@@ -1,0 +1,33 @@
+<extend name="Public:admin" />
+<block name="css">
+<js href="__PUBLIC__/jquery-1.7.2.min.js" />
+<js href="__JS__/cate.js" />
+<js href="__JS__/public.js" />
+</block>
+<block name="body">
+	<table class="table">
+		<tr>
+			<td class="th" colspan="20">分类列表</td>
+		</tr>
+		<tr class="tableTop">
+			<td class="tdLittle0 center">展开</td>
+			<td class="tdLittle1">ID</td>
+			<td>分类名称</td>
+			<td class="tdLtitle7">操作</td>
+		</tr>
+		<foreach name="data" item="v">
+		<tr width="15%" cid='{$v.cid}' pid='{$v.pid}'>
+			<td ><a href="javascript:void(0)" <if condition="$v['on']">class="showPlus"</if>></a></td>
+			<td>{$v.cid}</td>
+
+			
+			<td width="70%">{$v.html}{$v.title}</td>
+			<td>
+				[<a href="{:U('add_cate',array('pid'=>$v['cid']))}">添加子分类</a>][
+				<a href="{:U('edit',array('cid'=>$v['cid']))}">修改</a>][
+				<a href="{:U('del',array('cid'=>$v['cid']))}" class="del">删除</a>]
+			</td>
+		</tr>
+		</foreach>
+	</table>
+</block>

@@ -1,0 +1,37 @@
+<extend name="Public:admin" />
+<block name="body">
+	<table class="table">
+		<tr>
+			<td class="th" colspan="20">问题列表</td>
+		</tr>
+		<if condition="$data">
+		<tr class="tableTop">
+			<td class="tdLittle1">ID</td>
+			<td>问题内容</td>
+			<td>提问时间</td>
+			<td>回答人数</td>
+			<td>悬赏金币</td>
+			<td>操作</td>
+		</tr>
+		<foreach name="data" item="v">
+			<tr>
+				<td>{$v.asid}</td>
+				<td>{$v.content}</td>
+				<td>{$v.time|date='Y-m-d',###}</td>
+				<td>{$v.answer}</td>
+				<td>{$v.reward}</td>
+				<td>
+					<a href="{:U('Ask/del',array('asid'=>$v['asid']))}" class="del">删除</a>
+				</td>
+			</tr>
+		</foreach>
+		<else />
+		<tr> 
+			<td colspan='6'>没有相关数据</td>
+		</tr>
+		</if>
+	</table>
+	<div class="page">
+		{$page}
+	</div>
+</block>

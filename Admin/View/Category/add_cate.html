@@ -1,0 +1,33 @@
+<extend name="Public:admin" />
+<block name="css">
+<css href="__CSS__/add_category.css" />
+</block>
+<block name="body">
+	<form action="" method="post">
+		<table class="table">
+			<tr >
+				<td class="th" colspan="2">添加子分类</td>
+			</tr>
+			<tr>
+				<td>父级</td>
+				<td> 
+					<select name="pid" id=""> 
+						<foreach name="data" item="v">
+							<option <if condition="$v['cid'] eq $_GET['pid']">selected="selected"</if> value="{$v.cid}">{$v.html}{$v.title}</option>
+						</foreach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>子类名称</td>
+				<td><input type="text" name="title"/></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="submit" value="添加" class="input_button"/>
+					<input type="reset" class="input_button"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</block>

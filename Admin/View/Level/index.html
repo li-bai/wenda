@@ -1,0 +1,63 @@
+<extend name="Public:admin" />
+<block name="body">
+	<form action="{:U('editconfig')}" method='post'>
+		<table class="table">
+			<tr>
+				<th colspan='2'>经验级别规则设置</th>
+			</tr>
+			<tr>
+				<td align='right'>登录：</td>
+				<td>
+					+ <input type="text" name='LOGIN_EXP' value="{:C('LOGIN_EXP')}" />
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>提问：</td>
+				<td>
+					+ <input type="text" name='ASK_EXP' value="{:C('ASK_EXP')}" />
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>回答：</td>
+				<td>
+					+ <input type="text" name='ANSWER_EXP' value="{:C('ANSWER_EXP')}" />
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>采纳：</td>
+				<td>
+					+ <input type="text" name='SOLVE_EXP' value="{:C('SOLVE_EXP')}" />
+				</td>
+			</tr>
+		</table>
+		<table class='table'>
+			<tr>
+				<th colspan='8'>各等级所需经验</th>
+			</tr>
+			<!-- <volist name="lv" id="v" key="i" mod="4">
+			<eq name="mod" value="0"><tr></eq>
+				<td>LV{$i-1}:</td>
+				<td>
+					<input type="text" name='lv{$i-1}' value="{$v}" />
+				</td>
+			<if condition="$i eq count($lv)"></tr><else />
+			<eq name="mod" value="3"></tr></eq>
+			</if>
+			</volist> -->
+			<volist name="lv" id="v" key='i' mod='4'>
+			<eq name="mod" value="0"><tr></eq>
+				<td>LV{$i-1}:</td>
+				<td>
+					<input type="text" name='lv{$i-1}' value="{$v}" />
+				</td>
+			<eq name="mod" value="3"></tr></eq>
+			</volist>
+			</tr>
+			<tr>
+				<td colspan='8' align='center' height='60'>
+					<input type="submit" value='保存修改' class='input_button'/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</block>

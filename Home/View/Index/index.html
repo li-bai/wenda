@@ -1,0 +1,95 @@
+<extend name="Public:common" />
+<block name="css">
+<css href="__CSS__/index.css" />
+<css href="__STATIC__/hdvalidate/css/hdvalidate.css" />
+<js href="__STATIC__/hdvalidate/js/hdvalidate.js" />
+<script type="text/javascript"> 
+APP = '__APP__';
+</script>
+<js href="__JS__/index.js" />
+</block>
+<block name="body">
+	<include file="Public:top" />
+	<div class='main'>
+		<div id='left'>
+			<p class='left-title'>所有问题分类</p>
+			<ul class='left-list'>
+			<foreach name="category" item="v">
+				<li class='list-l1'>
+					<div class='list-l1-wrap'>
+						<h4><a href="{:U('Home/List/index',array('cid'=>$v['cid']))}">{$v.title}</a></h4>
+						<ul class='list-l2'>
+							<li>
+								<volist name="v['son']" id="a" offset="0" length='3'>
+									<a href="{:U('Home/List/index',array('cid'=>$a['cid']))}">{$a.title}</a>
+								</volist>
+							</li>
+						</ul>
+					</div>
+
+					<div class='list-more hidden'>
+						<ul>
+							<volist name="v['son']" id="b" offset="3" >
+								<li><a href="{:U('Home/List/index',array('cid'=>$b['cid']))}">{$b.title}</a></li>
+							</volist>
+						</ul>
+					</div>
+				</li>
+			</foreach>
+			</ul>
+		</div>
+
+		<div id='center'>
+			<div id='animate'>
+				<div class='imgs-wrap'>
+					<ul>
+						<li>
+							<a href=""><img src="__IMG__/animate1.jpg" width='558' height='190'/></a>
+						</li>
+						<li>
+							<a href=""><img src="__IMG__/animate2.jpg" width='558' height='190'/></a>
+						</li>
+						<li>
+							<a href=""><img src="__IMG__/animate3.jpg" width='558' height='190'/></a>
+						</li>
+					</ul>
+				</div>
+				<ul class='ani-btn'>
+					<li class='ani-btn-cur'>0学费学习<i></i></li>
+					<li>超百G原创视频<i></i></li>
+					<li style='border:none'>有实力做后盾<i></i></li>
+				</ul>
+			</div>
+
+			<dl class='answer-list'>
+				<dt>
+					<span class='wait-as'>待解决问题</span>
+					<a href=''>更多>></a>
+				</dt>
+				<foreach name="low" item="v">
+					<dd>
+						<a href="{:U('Home/Show/index',array('asid'=>$v['asid'],'cid'=>$v['cid']))}"><if condition="$v['reward']"><b>{$v.reward}</b></if>{$v.content}</a>
+						<span>{$v.answer}回答</span>
+					</dd>
+				</foreach>
+			</dl>
+
+			<dl class='answer-list'>
+				<dt>
+					<span class='reward-as'>高分悬赏问题</span>
+					<a href=''>更多>></a>
+				</dt>
+				<foreach name="tall" item="v">
+					<dd>
+						<a href="{:U('Home/Show/index',array('asid'=>$v['asid'],'cid'=>$v['cid']))}"><b>{$v.reward}</b>{$v.content}</a>
+						<span>{$v.answer}回答</span>
+					</dd>
+				</foreach>
+			</dl>
+
+		</div>
+<include file="Public:userright" />
+	</div>
+	<div class='clear'></div>
+</block>
+	

@@ -1,0 +1,53 @@
+<extend name="Public:admin" />
+<block name="css">
+	<style type="text/css">
+		.clearfix{*zoom:1}
+	.clearfix:before,.clearfix:after{display:table;line-height:0;content:""}
+	.clearfix:after{clear:both}
+		.list{
+			background: #EBEBEB;
+			height: 30px;
+			line-height: 30px;
+			padding-left: 10px;
+			font-size: 16px;
+			font-weight: 500;
+			color: #656E73;
+		}
+		ul.l1{
+			padding:0 10px;
+			color: #656E73;
+		}
+		ul.l1 h4{
+			padding-bottom: 10px;
+		}
+		ul.l1 .li{
+			overflow: hidden;
+			padding: 10px 0;
+			border-bottom: 1px solid #ccc;
+		}
+		ul.l1 a{
+			color: blue;
+			font-weight: normal;
+		}
+		ul.l2 li{
+			padding-right: 20px;
+			float: left;
+		}
+	</style>
+</block>
+<block name="body">
+	<h3 class="list">权限列表 [<a href="{:U('Auser/addrule',array('pid'=>0))}"> 添加控制器 </a>] </h3>
+	
+	<ul class="l1">
+	<foreach name="rule" item="v">
+		<li class="li">
+			<h4>{$v.title}[<a href="{:U('Auser/addrule',array('pid'=>$v['id']))}"> 添加方法 </a>|<a href="{:U('Auser/editrule',array('id'=>$v['id']))}">修改</a>|<a href="{:U('Auser/delrule',array('id'=>$v['id']))}">删除</a>]</h4>
+			<ul class="l2 clearfix">
+			<foreach name="v.son" item="var">
+				<li>{$var.title}[<a href="{:U('Auser/editrule',array('id'=>$var['id']))}">修改</a>|<a href="{:U('Auser/delrule',array('id'=>$var['id']))}">删除</a>]</li>
+			</foreach>
+			</ul>
+		</li>
+	</foreach>
+	</ul>
+</block>

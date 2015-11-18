@@ -1,0 +1,117 @@
+<div id='right'>
+		<if condition="session('user') && session('uid')">
+		<div class='userinfo'>
+			<dl>
+				<dt>
+					<a href="{:U('Member/index',array('uid'=>$_SESSION[
+				'uid']))}">
+					<if condition="$info['face']">
+						<img src="__ROOT__/{$info['face']}" width='60' height='60' alt="占位符"/>
+						<else />
+						<img src="__IMG__/001.png" width='60' height='60' alt="占位符"/>
+					</if>
+					</a>
+				</dt>
+				<dd class='username'>
+					<a href="{:U('Member/index',array('uid'=>$_SESSION[
+				'uid']))}">
+						<b>{$Think.session.user}</b>
+					</a>
+					<a href="{:U('Member/mylevel',array('uid'=>$_SESSION[
+				'uid']))}">
+						<i class='level lv{$info.lv}' title='Level {$info.lv}'></i>
+					</a>
+				</dd>
+				<dd>金币：<a href="{:U('Member/mygold',array('uid'=>$_SESSION[
+				'uid']))}" style="color: #888888;"><b class='point'>{$info.point}</b></a></dd>
+				<dd>经验值：{$info.exp}</dd>
+			</dl>
+			<table>
+				<tr>
+					<td>回答数</td>
+					<td>采纳率</td>
+					<td class='last'>提问数</td>
+				</tr>
+				<tr>
+					<td><a href="{:U('Member/myanswer',array('uid'=>$_SESSION[
+				'uid']))}">{$info.answer}</a></td>
+					<td><a href="{:U('Member/index',array('uid'=>$_SESSION[
+				'uid']))}">{$info.accnum}%</a></td>
+					<td class='last'><a href="{:U('Member/myask',array('uid'=>$_SESSION[
+				'uid']))}">{$info.ask}</a></td>
+				</tr>
+			</table>
+			<ul>
+				<li><a href="{:U('Member/myask',array('uid'=>$_SESSION[
+				'uid']))}">我提问的</a></li>
+				<li><a href="{:U('Member/myanswer',array('uid'=>$_SESSION[
+				'uid']))}">我回答的</a></li>
+			</ul>
+		</div>
+		<else />
+		<div class='r-login'>
+			<span class='login'><i></i>&nbsp;登录</span>
+			<span class='register'><i></i>&nbsp;注册</span>
+		</div>
+		</if>
+	<div class='clear'></div>
+	<div class='star'>
+		<p class='title'>后盾问答之星</p>
+		<span class='star-name'>本日回答问题最多的人</span>
+		<if condition="$ansToday">
+			<div class='star-info'>
+				<div>
+					<a href="{:U('Home/Member/index',array('uid'=>$ansToday['uid']))}" class='star-face'>
+						<if condition="$ansToday['face']">
+						<img src="__ROOT__/{$ansToday.face}" width='60' height='60' alt="占位符"/>
+						<else />
+						<img src="__IMG__/001.png" width='60' height='60' alt="占位符"/>
+						</if>
+					</a>
+					<ul>
+						<li><a href="{:U('Member/index',array('uid'=>$ansToday[
+				'uid']))}">{$ansToday.username}</a><i class='level lv{$ansToday.lv}' title='Level {$ansToday.lv}'></i></li>
+						<li>回答数：<span>{$ansToday.answer}</span></li>
+						<li>采纳率：<span>{$ansToday.accnum}%</span></li>
+					</ul>
+				</div>
+			</div>
+		</if>
+		<span class='star-name'>历史回答问题最多的人</span>
+		<if condition="$ansHis">
+		<div class='star-info'>
+			<div>
+				<a href="{:U('Home/Member/index',array('uid'=>$ansHis['uid']))}" class='star-face'>
+					<if condition="$ansHis['face']">
+						<img src="__ROOT__/{$ansHis.face}" width='60' height='60' alt="占位符"/>
+						<else />
+						<img src="__IMG__/001.png" width='60' height='60' alt="占位符"/>
+						</if>
+				</a>
+				<ul>
+					<li><a href="{:U('Home/Member/index',array('uid'=>$ansHis['uid']))}">{$ansHis.username}</a><i class='level lv{$ansHis.lv}' title='Level {$ansHis.lv}'></i></li>
+					<li>回答数：<span>{$ansHis.answer}</span></li>
+					<li>采纳率：<span>{$ansHis.accnum}%</span></li>
+				</ul>
+			</div>
+		</div>
+		</if>
+	</div>
+	<div class='star-list'>
+		<p class='title'>后盾问答助人光荣榜</p>
+		<div>
+			<ul class='ul-title'>
+				<li>用户名</li>
+				<li style='text-align:right;'>帮助过的人数</li>
+			</ul>
+			<ul class='ul-list'>
+			<foreach name="helpTop" item="v" key="k">
+				<li>
+					<a href="{:U('Home/Member/index',array('uid'=>$v['uid']))}"><i class='rank r{$k+1}'></i>{$v.username}</a>
+					<span>{$v.accept}</span>
+				</li>
+			</foreach>		
+			</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,32 @@
+.imgface_box{
+	position: relative;
+	overflow: visible;
+	height:500px;
+}
+
+#target{
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: none;
+}
+.face{
+	position: absolute;
+	left: 270px;
+	top: 30px;
+	width: 150px;
+	height: 150px;
+}
+.face p{
+	position: absolute;
+	left: 10px;
+	top: 0px;
+}
+#btn,#reset{
+	position: absolute;
+	top: 270px;
+	display: none;
+}
+#reset{
+	left: 50px;
+}

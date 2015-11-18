@@ -1,0 +1,103 @@
+<extend name="Public:common" />
+<block name="css">
+<css href="__CSS__/member.css" />
+<css href="__CSS__/face.css" />
+<css href="__STATIC__/hdvalidate/css/hdvalidate.css" />
+<js href="__STATIC__/hdvalidate/js/hdvalidate.js" />
+
+<css href="__STATIC__/uploadify/uploadify.css" />
+<js href="__STATIC__/uploadify/jquery.uploadify.min.js" />
+
+<css href="__STATIC__/jcrop/jquery.Jcrop.min.css" />
+<js href="__STATIC__/jcrop/jquery.Jcrop.min.js" />
+<js href="__STATIC__/jcrop/cropFace.js" />
+
+<script type="text/javascript">
+$(function(){
+	APP = '__APP__';
+   $('#file_upload').uploadify({
+	    'swf': '__STATIC__/uploadify/uploadify.swf',
+	    'uploader': '{:U("setFace",array("uid"=>$_SESSION["uid"]))}',
+	    'buttonImage': '__STATIC__/uploadify/select_face.png',
+	    'fileTypeExts': '*.jpg;*.png;*.gif',
+	    'multi': false,
+	    'fileSizeLimit': '2MB',
+	    'uploadLimit': 1000,
+	    'width': 250,
+	    'height': 250,
+	    'onUploadSuccess': function (file, data, response) 
+	    {
+	    	eval('data=' + data);
+	    	if (data.status == 1) {
+		    		 var img = data.message;
+				    $("#target").show().attr("src", '__ROOT__/'+img);
+				    $("div.jcrop-holder").show();
+				    $("div.jcrop-holder img").attr("src", '__ROOT__/'+img);
+				    $("#preview150").attr("src", '__ROOT__/'+img);
+				    // 隐藏上传
+				    $("#face_upload").hide();
+				    // 设置重新上传 为显示
+				    $("#btn").show();
+				    $("input[name=img_face]").val(data.message);
+				    $("#reset").show();
+				    $("#SWFUpload_0_0").remove();
+			    } else {
+			    	alert(data.message);
+			    }
+		  }
+    });
+    //重新上传头像
+    $('#reset').click(function(){
+    		$(this).hide();
+    		$('#btn').hide();
+    		$("div.jcrop-holder").hide();
+    		$("#face_upload").show();
+    });
+})
+</script>
+<js href="__JS__/index.js" />
+</block>
+<block name="body">
+<include file="Public:top" />
+<div id='center'>
+<include file="Public:left" />
+	<div id='right'>
+		<p class='title'>头像上传</p>
+		<p>支持JPG、PNG、GIF图片类型，不能大于2M。推荐尺寸：180PX*180PX</p>
+		<ul class='ask-filter'></ul>
+		<div class='imgface_box'>
+		<!-- 上传显示 -->
+			<img src="__STATIC__/uploadify/select_face.png" id="target"
+  style="display:none" />
+			<div id="face_upload">
+            <input type="file" name="file_upload" id="file_upload"/>
+        </div>
+
+	<form action="" method="POST">
+		<input type="hidden" name="img_face" value=""/>
+		<input type="hidden" size="4" id="x1" name="x1" value="0"/>
+		<input type="hidden" size="4" id="y1" name="y1" value="0"/>
+		<input type="hidden" size="4" id="x2" name="x2" value="249"/>
+		<input type="hidden" size="4" id="y2" name="y2" value="249"/>
+		<input type="hidden" size="4" id="w" name="w" value="250"/>
+		<input type="hidden" size="4" id="h" name="h" value="250"/> 
+		<input type="submit" id='btn' value="保存">
+		<input id='reset' type="button" value="重新上传" style="">
+	</form>
+
+	<div class="face">
+        <div style="width:150px;height:150px;overflow:hidden;">
+        <if condition="$left['face']">
+        <img src="__ROOT__/{$left.face}" id="preview150" alt="Preview"
+                 style="width:150px;">
+        <else />
+        <img src="__IMG__/001.png" id="preview150" alt="Preview"
+                 style="width:150px;">
+        </if>
+            
+        </div>
+    </div>
+		</div>
+	</div>
+</div>
+</block>

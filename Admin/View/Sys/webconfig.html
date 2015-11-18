@@ -1,0 +1,67 @@
+<extend name="Public:admin" />
+<block name="css"> 
+<style type="text/css">
+		.table input{
+			height: 28px;
+			vertical-align: middle;
+		}
+	</style>
+</block>
+<block name="body">
+<form action="{:U('editConfig')}" method="POST">
+	<table class="table">
+		<tr>
+			<td colspan='2' class="th">网站设置</td>
+		</tr>
+			<tr>
+				<td align='right' width='45%'>网站名称：</td>
+				<td>
+					 <input type="text" name='WEB_NAME' value='{:C('WEB_NAME')}'/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>网站关键词：</td>
+				<td>
+					 <input type="text" name='KEYWORDS' value='{:C('KEYWORDS')}' style="width:400px;"/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>网站描述：</td>
+				<td>
+					 <input type="text" name='DESCRIPTION' value='{:C('DESCRIPTION')}' style="width:400px;"/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>版权信息：</td>
+				<td>
+					<input type="text" style="width:400px;" name="COPYINFO" value="{:C('COPYINFO')}"/>
+				</td> 
+			</tr>
+			<tr>
+				<td align='right'>备案号：</td>
+				<td>
+					<input type="text" style="width:400px;" name="RECORD" value="{:C('RECORD')}"/>
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>是否开放注册：</td>
+				<td>
+					<input type="radio" <if condition="C('RES_ON') eq 1">checked="checked"</if> name="RES_ON" value="1"/>开启
+					<input <if condition="C('RES_ON') eq 0">checked="checked"</if> type="radio" name="RES_ON" value="0"/>关闭
+				</td>
+			</tr>
+			<tr>
+				<td align='right'>网站状态：</td>
+				<td>
+					<input type="radio" <if condition="C('WEB_ON') eq 1">checked="checked"</if> name="WEB_ON" value="1"/>开启
+					<input type="radio" <if condition="C('WEB_ON') eq 0">checked="checked"</if> name="WEB_ON" value="0"/>关闭
+				</td>
+			</tr>
+			<tr>
+				<td colspan='2' height='60' align='center'>
+					<input type="submit" value='保存修改' class='input_button'/>
+				</td>
+			</tr>
+</table>
+</form>
+</block>
